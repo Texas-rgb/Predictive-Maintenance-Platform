@@ -1,0 +1,5 @@
+fastapi[standard]
+tensorflow-cpu
+joblib
+numpy
+pandas
