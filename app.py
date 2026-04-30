@@ -4,6 +4,7 @@ from tensorflow.keras import layers
 import numpy as np
 
 # 1. Define the custom Attention Layer
+
 @tf.keras.utils.register_keras_serializable()
 class AttentionLayer(layers.Layer):
     def __init__(self, **kwargs):
@@ -11,7 +12,6 @@ class AttentionLayer(layers.Layer):
 
     def build(self, input_shape):
         feature_dim = input_shape[-1]
-        # FIX: Ensure these are all indented with exactly 8 spaces (2 tabs)
         self.W = self.add_weight(
             name="att_weight",
             shape=(feature_dim, feature_dim),
@@ -20,7 +20,7 @@ class AttentionLayer(layers.Layer):
         )
         self.u = self.add_weight(
             name="att_context",
-            shape=(feature_dim, 1),
+            shape=(feature_dim,), # MATCHES THE SAVED SHAPE (64,)
             initializer="glorot_uniform",
             trainable=True
         )
@@ -35,7 +35,7 @@ class AttentionLayer(layers.Layer):
     def call(self, inputs):
         score = tf.nn.tanh(tf.tensordot(inputs, self.W, axes=1) + self.b)
         attention_weights = tf.nn.softmax(tf.tensordot(score, self.u, axes=1), axis=1)
-        return tf.reduce_sum(inputs * attention_weights, axis=1)
+        return tf.reduce_sum(inputs * tf.expand_dims(attention_weights, -1), axis=1)
 
     def get_config(self):
         return super(AttentionLayer, self).get_config()
