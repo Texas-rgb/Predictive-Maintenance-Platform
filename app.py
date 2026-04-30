@@ -3,7 +3,11 @@ import tensorflow as tf
 from tensorflow.keras import layers
 import joblib
 import numpy as np
+import pickle
 
+# Replace the joblib line with this:
+with open("scaler.pkl", "rb") as f:
+    scaler = pickle.load(f)
 # 1. Define the "Blueprint" for the cloud
 @tf.keras.utils.register_keras_serializable()
 class AttentionLayer(layers.Layer):
