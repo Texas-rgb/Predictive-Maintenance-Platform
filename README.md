@@ -174,7 +174,7 @@ Real IoT sensor integration is architecturally supported — the sensor schema a
 
 ## Author
 
-Built by [Your Name](https://github.com/yourusername)
+Built by Tanisha Suyal (https://github.com/Texas-rgb)
 
 Model hosted on [Hugging Face Spaces](https://huggingface.co/spaces/Texas-rgb/aviation-predictive-maintenance)
 
